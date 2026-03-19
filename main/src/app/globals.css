@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* =========================================
+   ESTILOS DA MARCA D'ÁGUA (ALIMENTA SUS)
+   ========================================= */
+
+/* Container principal que vai receber a marca d'água */
+.fundo-com-logo {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* A mágica da imagem transparente no fundo */
+.fundo-com-logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Puxa a imagem transparente (que você baixou do Remove.bg) da pasta public */
+  background-image: url('/logo-fundo.png'); 
+  background-position: center 15%; /* Centraliza e sobe um pouquinho */
+  background-repeat: no-repeat;
+  background-size: 300px; /* Ajuste o tamanho da logo aqui se precisar */
+  
+  /* Deixa a imagem transparente (0.08 = bem fraquinha no fundo) */
+  opacity: 0.08; 
+  
+  /* Garante que a imagem não atrapalhe os cliques nos botões */
+  z-index: 0; 
+  pointer-events: none;
+}

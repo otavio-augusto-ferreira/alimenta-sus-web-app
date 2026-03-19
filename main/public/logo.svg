@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="100%" height="100%" fill="#fdf4e6"/>
+  <g transform="translate(256,192)">
+    <circle cx="0" cy="0" r="120" fill="#165b2f"/>
+    <path d="M-120 0h240v-96a120 120 0 0 0-240 0z" fill="#f7e6bf"/>
+    <ellipse cx="-40" cy="-20" rx="36" ry="24" fill="#e3542b"/>
+    <g fill="#3b2a1a">
+      <circle cx="48" cy="-8" r="14"/>
+      <circle cx="76" cy="10" r="14"/>
+      <circle cx="32" cy="20" r="14"/>
+    </g>
+  </g>
+  <text x="50%" y="410" font-family="Inter, Arial, sans-serif" font-size="56" fill="#165b2f" font-weight="700" text-anchor="middle">ALIMENTA</text>
+  <text x="50%" y="470" font-family="Inter, Arial, sans-serif" font-size="56" fill="#165b2f" font-weight="700" text-anchor="middle">SUS</text>
+</svg>
