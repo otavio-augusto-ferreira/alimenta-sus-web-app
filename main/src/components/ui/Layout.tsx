@@ -7,8 +7,6 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-  
-  console.log("--- RENDERIZANDO O LAYOUT LIMPO ---");
   return (
     <div className="relative min-h-screen">
       <main>{children}</main>

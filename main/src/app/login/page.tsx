@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "main/src/components/ui/Button";
-import { useRouter } from "next/navigation";
 import { Layout } from "main/src/components/ui/Layout";
 import Image from 'next/image';
 import React, { useState } from "react";
@@ -10,7 +9,6 @@ import Input from "main/src/components/ui/Input";
 import Cookies from 'js-cookie';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [show, setShow] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {

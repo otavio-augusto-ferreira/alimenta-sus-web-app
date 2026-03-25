@@ -1,4 +1,3 @@
-import { Button } from "main/src/components/ui/Button";
 import Link from 'next/link';
 import Image from 'next/image';
 // Note que removemos todas aquelas importações de hooks (useState, useEffect, useRouter)
@@ -7,9 +6,9 @@ import Image from 'next/image';
 export default function Introducao() {
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start pt-6 px-6 bg-[#fbf8f2]">
+    <main className="flex min-h-screen flex-col items-center justify-center px-6 bg-[#fbf8f2]">
 
-      <div className="w-full max-w-sm mx-auto flex flex-col items-center -mt-12 sm:-mt-20">
+      <div className="w-full max-w-sm mx-auto flex flex-col items-center">
         <Image
           src="/logo.png"
           alt="Alimenta SUS"
@@ -19,7 +18,7 @@ export default function Introducao() {
           priority
         />
 
-        <h2 className="text-3xl sm:text-4xl font-semibold text-[#165b2f] -mt-3 mb-3">Bem-vindo</h2>
+        <h2 className="text-3xl sm:text-4xl font-semibold text-[#165b2f] -mt-3 mb-3 text-center">Bem-vindo</h2>
 
         <p className="text-sm sm:text-base text-[#3b2a1a] max-w-prose mt-2 mb-6 px-6 text-center">
           O Alimenta SUS é um aplicativo de orientação alimentar.
