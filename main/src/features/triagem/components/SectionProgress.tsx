@@ -5,14 +5,14 @@ type SectionProgressProps = {
 
 export function SectionProgress({ label, progress }: SectionProgressProps) {
   return (
-    <div className="mx-auto w-full max-w-[920px] rounded-[28px] border border-[#efe5d6] bg-white/90 p-4 shadow-sm md:p-5">
-      <div className="mb-2.5 flex items-center justify-between gap-3 md:mb-3">
-        <span className="text-sm font-semibold text-[#004D33] md:text-[0.95rem]">{label}</span>
-        <span className="text-sm font-bold text-[#e2954a] md:text-[0.95rem]">{progress}%</span>
+    <div className="rounded-2xl border border-[#dfe7e2] bg-white px-5 py-4 shadow-[0_6px_18px_rgba(17,24,39,0.04)] md:px-6">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="text-sm font-semibold text-[#17352a]">{label}</span>
+        <span className="text-sm font-semibold text-[#1f6b4f]">{progress}%</span>
       </div>
-      <div className="h-3 rounded-full bg-[#f5eee2] md:h-[0.82rem]">
+      <div className="h-2 rounded-full bg-[#edf2ee]">
         <div
-          className="h-3 rounded-full bg-gradient-to-r from-[#facc15] via-[#f5a524] to-[#e2954a] transition-all duration-300 md:h-[0.82rem]"
+          className="h-2 rounded-full bg-[#1f6b4f] transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>

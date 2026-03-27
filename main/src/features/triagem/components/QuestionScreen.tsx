@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { TriageAnswer, TriageQuestion } from "../types";
+import { ActionBar } from "./ActionBar";
 import { AnswerButtonGroup } from "./AnswerButtonGroup";
-import { BackNextControls } from "./BackNextControls";
+import { QuestionCard } from "./QuestionCard";
+import { TriageLayout } from "./TriageLayout";
 
 type QuestionScreenProps = {
   question: TriageQuestion;
@@ -28,9 +30,16 @@ export function QuestionScreen({
       return;
     }
 
-    setSelectedValues(Array.isArray(answer.value) ? answer.value : [answer.value]);
+    const nextSelectedValues = Array.isArray(answer.value) ? answer.value : [answer.value];
+    setSelectedValues(
+      question.type === "multi-choice"
+        ? nextSelectedValues
+        : nextSelectedValues.length > 0
+          ? [nextSelectedValues[nextSelectedValues.length - 1]]
+          : [],
+    );
     setNote(answer.note ?? "");
-  }, [answer, question.id]);
+  }, [answer, question.id, question.type]);
 
   const canSubmit = useMemo(() => {
     if (question.type === "text") {
@@ -45,78 +54,83 @@ export function QuestionScreen({
       return;
     }
 
-    if (question.type === "multi-choice") {
-      onSubmit(selectedValues, note.trim() || undefined);
+    if (question.type === "text") {
+      onSubmit(note.trim(), note.trim());
       return;
     }
 
-    if (question.type === "text") {
-      onSubmit(note.trim(), note.trim());
+    if (question.type === "multi-choice") {
+      onSubmit(selectedValues, note.trim() || undefined);
       return;
     }
 
     onSubmit(selectedValues[0], note.trim() || undefined);
   };
 
-  const selectedCount = selectedValues.length;
-  const isMultiChoice = question.type === "multi-choice";
+  const selectionLabel =
+    question.type === "multi-choice" ? "Selecao multipla" : "Selecao unica";
+
+  const selectionStatus =
+    question.type === "text"
+      ? null
+      : selectedValues.length > 0
+        ? question.type === "multi-choice"
+          ? `${selectedValues.length} opcoes marcadas`
+          : "1 opcao marcada"
+        : "Selecione uma resposta";
 
   return (
-    <div className="w-full rounded-[32px] bg-white p-5 shadow-md sm:p-6 md:p-8 lg:p-10">
-      <div className="mb-6 md:mb-8">
-        <div className="mb-3 inline-flex rounded-full bg-[#fff5df] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#9a6316]">
-          Pergunta da triagem
-        </div>
-        <h1 className="max-w-[24ch] text-2xl font-extrabold leading-[1.18] text-[#004D33] sm:text-[2rem] md:text-[2.15rem]">
-          {question.title}
-        </h1>
-        {question.description ? (
-          <p className="mt-3 max-w-[62ch] text-sm leading-relaxed text-[#2a5a45] md:text-base md:leading-7">
-            {question.description}
-          </p>
-        ) : null}
-        {question.helperText ? (
-          <details className="mt-3 rounded-2xl border border-[#e7ddcc] bg-[#fff9f0] px-4 py-3">
-            <summary className="cursor-pointer text-sm font-semibold text-[#0d5e45]">
-              Ver dica desta pergunta
-            </summary>
-            <p className="mt-2 text-sm leading-relaxed text-[#537765] md:text-[0.96rem] md:leading-7">
-              {question.helperText}
-            </p>
-          </details>
-        ) : null}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-[#dce8e1] bg-[#f4faf7] px-3 py-1 text-xs font-semibold text-[#2b6a55]">
-            {isMultiChoice ? "Seleção múltipla" : "Seleção única"}
+    <TriageLayout
+      eyebrow="PERGUNTA DA TRIAGEM"
+      title={question.title}
+      helperText={question.description}
+      footer={
+        <ActionBar
+          secondaryLabel="Voltar"
+          primaryLabel="Prosseguir"
+          onSecondary={onBack}
+          onPrimary={handleSubmit}
+          primaryDisabled={!canSubmit}
+        />
+      }
+    >
+      <div className="mb-5 flex flex-wrap gap-2">
+        <span className="rounded-full border border-[#dfe7e2] bg-[#f7faf8] px-3 py-1 text-xs font-semibold text-[#345446]">
+          {selectionLabel}
+        </span>
+        {selectionStatus ? (
+          <span className="rounded-full border border-[#dfe7e2] bg-[#f7faf8] px-3 py-1 text-xs font-semibold text-[#345446]">
+            {selectionStatus}
           </span>
-          {question.type !== "text" ? (
-            <span className="rounded-full border border-[#dce8e1] bg-[#f4faf7] px-3 py-1 text-xs font-semibold text-[#2b6a55]">
-              {selectedCount > 0
-                ? `${selectedCount} ${selectedCount === 1 ? "opção marcada" : "opções marcadas"}`
-                : "Toque para selecionar"}
-            </span>
-          ) : null}
-        </div>
+        ) : null}
       </div>
 
-      {question.type === "text" ? (
-        <textarea
-          value={note}
-          onChange={(event) => setNote(event.target.value)}
-          placeholder={question.placeholder ?? "Escreva aqui"}
-          className="min-h-[150px] w-full rounded-[24px] border border-[#eadfce] bg-[#fffaf2] px-4 py-4 text-base leading-relaxed text-[#004D33] outline-none transition-colors focus:border-[#004D33] md:min-h-[170px] md:px-5 md:py-5"
-        />
-      ) : (
-        <AnswerButtonGroup
-          question={question}
-          selectedValues={selectedValues}
-          onChange={setSelectedValues}
-        />
-      )}
+      {question.helperText ? (
+        <div className="mb-5 rounded-xl border border-[#e6ece8] bg-[#f8fbf9] px-4 py-3 text-sm leading-6 text-[#5b6d63]">
+          {question.helperText}
+        </div>
+      ) : null}
+
+      <QuestionCard>
+        {question.type === "text" ? (
+          <textarea
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            placeholder={question.placeholder ?? "Escreva aqui"}
+            className="min-h-[170px] w-full rounded-xl border border-[#dfe7e2] bg-white px-4 py-4 text-base leading-7 text-[#17352a] outline-none transition-colors focus:border-[#1f6b4f] focus-visible:ring-4 focus-visible:ring-[#26724f]/20"
+          />
+        ) : (
+          <AnswerButtonGroup
+            question={question}
+            selectedValues={selectedValues}
+            onChange={setSelectedValues}
+          />
+        )}
+      </QuestionCard>
 
       {question.allowNotes ? (
-        <div className="mx-auto mt-6 w-full max-w-[42rem] md:mt-7">
-          <label className="mb-2 block text-sm font-semibold text-[#004D33] md:text-[0.96rem]">
+        <div className="mt-6">
+          <label className="mb-2 block text-sm font-semibold text-[#17352a]">
             {question.allowNotes.label}
           </label>
           <textarea
@@ -125,19 +139,10 @@ export function QuestionScreen({
               setNote(event.target.value.slice(0, question.allowNotes?.maxLength))
             }
             placeholder={question.allowNotes.placeholder}
-            className="min-h-[120px] w-full rounded-[24px] border border-[#eadfce] bg-[#fffaf2] px-4 py-4 text-sm leading-relaxed text-[#004D33] outline-none transition-colors focus:border-[#004D33] md:min-h-[136px] md:px-5 md:py-5 md:text-[0.95rem]"
+            className="min-h-[132px] w-full rounded-xl border border-[#dfe7e2] bg-white px-4 py-4 text-sm leading-7 text-[#17352a] outline-none transition-colors focus:border-[#1f6b4f] focus-visible:ring-4 focus-visible:ring-[#26724f]/20"
           />
         </div>
       ) : null}
-
-      <div className="mt-8 border-t border-[#f0e8db] pt-6 md:mt-10 md:pt-7">
-        <BackNextControls
-          onBack={onBack}
-          onNext={handleSubmit}
-          nextDisabled={!canSubmit}
-          nextLabel="Ver orientação"
-        />
-      </div>
-    </div>
+    </TriageLayout>
   );
 }

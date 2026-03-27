@@ -21,7 +21,7 @@ export function SummaryScreen({
   const classificationCopy = getClassificationCopy(summary.classification);
 
   return (
-    <div className="w-full space-y-6 md:space-y-7 lg:space-y-8">
+    <div className="space-y-6">
       <RecommendationCard
         tone={classificationCopy.tone}
         title={`Resumo final - ${getAgeGroupLabel(ageGroup)}`}
@@ -30,17 +30,17 @@ export function SummaryScreen({
       />
 
       {summary.highPriorityFlags.length > 0 ? (
-        <div className="rounded-[32px] border border-[#efc0b8] bg-[#fff3ef] p-5 shadow-sm sm:p-6 md:p-7">
-          <div className="text-sm font-bold uppercase tracking-[0.12em] text-[#b4432f]">
-            Sinais que pedem atenção prioritária
+        <div className="rounded-2xl border border-[#ebd2cb] bg-[#fff7f4] p-6 shadow-[0_8px_24px_rgba(21,47,35,0.05)]">
+          <div className="text-xs font-bold uppercase tracking-[0.12em] text-[#7b3728]">
+            Sinais que pedem atencao prioritaria
           </div>
-          <div className="mt-4 space-y-3 md:space-y-4">
+          <div className="mt-4 space-y-3">
             {summary.highPriorityFlags.map((flag) => (
-              <div key={flag} className="rounded-[22px] bg-white/80 p-4 md:p-5">
-                <div className="font-bold text-[#8c2f1f] md:text-[1.04rem]">
+              <div key={flag} className="rounded-xl border border-[#f1dfd9] bg-white p-4">
+                <div className="font-semibold text-[#7b3728]">
                   {RISK_FLAG_CATALOG[flag]?.title}
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-[#8c2f1f] md:text-[0.95rem] md:leading-7">
+                <p className="mt-2 text-sm leading-6 text-[#7b3728]">
                   {RISK_FLAG_CATALOG[flag]?.description}
                 </p>
               </div>
@@ -49,16 +49,16 @@ export function SummaryScreen({
         </div>
       ) : null}
 
-      <div className="rounded-[32px] bg-white p-5 shadow-md sm:p-6 md:p-7 lg:p-8">
-        <div className="mb-5 md:mb-6">
-          <div className="text-sm font-bold uppercase tracking-[0.12em] text-[#e2954a]">
-            Recomendações personalizadas
+      <div className="rounded-2xl border border-[#dfe7e2] bg-white p-6 shadow-[0_8px_24px_rgba(21,47,35,0.05)] md:p-8">
+        <div className="mb-5">
+          <div className="text-xs font-bold uppercase tracking-[0.12em] text-[#5d4d33]">
+            Recomendacoes personalizadas
           </div>
-          <h2 className="mt-2 text-xl font-extrabold leading-tight text-[#004D33] md:text-2xl">
-            Sugestões para seguir cuidando
+          <h2 className="mt-2 text-[1.6rem] font-bold text-[#17352a]">
+            Sugestoes para seguir cuidando
           </h2>
         </div>
-        <div className="space-y-4 md:space-y-5">
+        <div className="space-y-4">
           {summary.recommendations.map((recommendation) => (
             <RecommendationCard
               key={recommendation.topic}
@@ -71,32 +71,32 @@ export function SummaryScreen({
         </div>
       </div>
 
-      <div className="rounded-[32px] bg-white p-5 shadow-md sm:p-6 md:p-7 lg:p-8">
-        <div className="mb-5 md:mb-6">
-          <div className="text-sm font-bold uppercase tracking-[0.12em] text-[#e2954a]">
-            Panorama por seção
+      <div className="rounded-2xl border border-[#dfe7e2] bg-white p-6 shadow-[0_8px_24px_rgba(21,47,35,0.05)] md:p-8">
+        <div className="mb-5">
+          <div className="text-xs font-bold uppercase tracking-[0.12em] text-[#5d4d33]">
+            Panorama por secao
           </div>
-          <h2 className="mt-2 text-xl font-extrabold leading-tight text-[#004D33] md:text-2xl">
+          <h2 className="mt-2 text-[1.6rem] font-bold text-[#17352a]">
             Como a triagem se distribuiu
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {summary.sectionSummaries.map((sectionSummary) => (
             <div
               key={sectionSummary.sectionId}
-              className="rounded-[24px] border border-[#efe6d8] bg-[#fcfaf5] p-4 md:p-5"
+              className="rounded-xl border border-[#e5e7eb] bg-[#fbfcfb] p-4"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <div className="font-bold text-[#004D33] md:text-[1.02rem]">
+                  <div className="font-semibold text-[#17352a]">
                     {sectionSummary.title}
                   </div>
-                  <div className="mt-1 text-sm leading-relaxed text-[#557665]">
+                  <div className="mt-1 text-sm leading-6 text-[#5b6d63]">
                     {sectionSummary.answeredCount} de {sectionSummary.visibleCount} perguntas
                     respondidas
                   </div>
                 </div>
-                <div className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-bold text-[#e2954a]">
+                <div className="shrink-0 rounded-full bg-[#eef7f2] px-3 py-1 text-sm font-semibold text-[#1f6b4f]">
                   {sectionSummary.score} pts
                 </div>
               </div>
@@ -106,16 +106,16 @@ export function SummaryScreen({
       </div>
 
       {summary.resources.length > 0 ? (
-        <div className="rounded-[32px] bg-white p-5 shadow-md sm:p-6 md:p-7 lg:p-8">
-          <div className="mb-5 md:mb-6">
-            <div className="text-sm font-bold uppercase tracking-[0.12em] text-[#e2954a]">
-              Recursos úteis
+        <div className="rounded-2xl border border-[#dfe7e2] bg-white p-6 shadow-[0_8px_24px_rgba(21,47,35,0.05)] md:p-8">
+          <div className="mb-5">
+            <div className="text-xs font-bold uppercase tracking-[0.12em] text-[#5d4d33]">
+              Recursos uteis
             </div>
-            <h2 className="mt-2 text-xl font-extrabold leading-tight text-[#004D33] md:text-2xl">
-              Materiais e apoios para o próximo passo
+            <h2 className="mt-2 text-[1.6rem] font-bold text-[#17352a]">
+              Materiais e apoios para o proximo passo
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {summary.resources.map((resource) => (
               <ResourceCard key={resource.id} resource={resource} />
             ))}
@@ -123,7 +123,7 @@ export function SummaryScreen({
         </div>
       ) : null}
 
-      <div className="border-t border-[#eee2d1] pt-6 md:pt-7">
+      <div className="rounded-2xl border border-[#dfe7e2] bg-white px-6 pb-6 pt-5 shadow-[0_8px_24px_rgba(21,47,35,0.05)] md:px-8 md:pb-7">
         <BackNextControls
           onBack={onBack}
           onNext={onRestart}

@@ -14,8 +14,8 @@ export function TriageStepper({
   completedSectionIds,
 }: TriageStepperProps) {
   return (
-    <div className="mx-auto w-full max-w-[920px] overflow-x-auto pb-2">
-      <div className="flex min-w-max gap-2.5 md:gap-3">
+    <div className="overflow-x-auto pb-1">
+      <div className="flex min-w-max flex-wrap gap-2">
         {sectionIds.map((sectionId) => {
           const section = TRIAGE_SECTIONS_MAP[sectionId];
           const isCurrent = currentSectionId === sectionId;
@@ -24,12 +24,12 @@ export function TriageStepper({
           return (
             <div
               key={sectionId}
-              className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-[0.82rem] font-semibold transition-colors md:px-4.5 md:text-sm ${
+              className={`flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-medium transition-colors ${
                 isCurrent
-                  ? "border-[#004D33] bg-[#004D33] text-white"
+                  ? "border-[#1f6b4f] bg-[#1f6b4f] text-white"
                   : isCompleted
-                    ? "border-[#facc15] bg-[#fff6d6] text-[#6b4d10]"
-                    : "border-[#ede0cf] bg-white text-[#6f6a61]"
+                    ? "border-[#cfe2d7] bg-[#eef7f2] text-[#1f6b4f]"
+                    : "border-[#dfe7e2] bg-white text-[#50635a]"
               }`}
             >
               <TriageIcon name={section.icon} className="h-4 w-4 shrink-0" />

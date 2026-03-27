@@ -8,9 +8,9 @@ type RecommendationCardProps = {
 };
 
 const toneStyles: Record<FeedbackTone, string> = {
-  positive: "border-[#d9ecd9] bg-[#f5fbf5] text-[#004D33]",
-  attention: "border-[#f5d4a9] bg-[#fff7ea] text-[#7b4a00]",
-  alert: "border-[#efc0b8] bg-[#fff3ef] text-[#8c2f1f]",
+  positive: "border-[#d7e7de] bg-[#f5fbf7] text-[#17352a]",
+  attention: "border-[#eadfbe] bg-[#fffaf0] text-[#5e4a22]",
+  alert: "border-[#ebd2cb] bg-[#fff7f4] text-[#7b3728]",
 };
 
 export function RecommendationCard({
@@ -20,15 +20,15 @@ export function RecommendationCard({
   benefit,
 }: RecommendationCardProps) {
   return (
-    <div className={`rounded-[28px] border p-5 shadow-sm md:p-6 lg:p-7 ${toneStyles[tone]}`}>
-      <div className="mb-2 text-xs font-bold uppercase tracking-[0.12em] opacity-80 md:text-sm">
+    <div className={`rounded-2xl border p-6 shadow-[0_8px_24px_rgba(21,47,35,0.05)] md:p-7 ${toneStyles[tone]}`}>
+      <div className="mb-2 text-xs font-bold uppercase tracking-[0.12em] opacity-80">
         {title}
       </div>
-      <p className="max-w-[60ch] text-base font-semibold leading-relaxed md:text-[1.08rem] md:leading-8">
+      <p className="max-w-[60ch] text-base font-semibold leading-7 md:text-lg">
         {summary}
       </p>
       {benefit ? (
-        <p className="mt-4 max-w-[62ch] text-sm leading-relaxed opacity-90 md:text-base md:leading-7">
+        <p className="mt-4 max-w-[62ch] text-sm leading-7 opacity-90 md:text-base">
           {benefit}
         </p>
       ) : null}

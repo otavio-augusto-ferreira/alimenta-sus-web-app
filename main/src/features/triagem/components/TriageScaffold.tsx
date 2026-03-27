@@ -22,15 +22,15 @@ export function TriageScaffold({
   completedSectionIds = [],
 }: TriageScaffoldProps) {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#f5fcf7] via-[#f1faf4] to-[#ebf7ef] px-4 pb-16 pt-6 sm:pt-8 md:px-8 md:pb-20 lg:px-10 lg:pb-24 lg:pt-10 xl:px-14">
-      <div className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col gap-4 md:gap-5 lg:gap-6">
+    <main className="min-h-screen bg-[#f8faf8] px-4 pb-16 pt-6 md:px-6 md:pb-20 md:pt-8">
+      <div className="mx-auto flex w-full max-w-[960px] flex-col gap-6">
         <div className="flex justify-center">
           <Image
             src="/logo.png"
             alt="Alimenta SUS"
             width={124}
             height={124}
-            className="h-auto w-24 md:w-28 lg:w-[7.6rem]"
+            className="h-auto w-24 md:w-28"
             priority
           />
         </div>
@@ -47,7 +47,7 @@ export function TriageScaffold({
           />
         ) : null}
 
-        <div className="mx-auto w-full max-w-[920px]">{children}</div>
+        <div className="w-full">{children}</div>
       </div>
     </main>
   );

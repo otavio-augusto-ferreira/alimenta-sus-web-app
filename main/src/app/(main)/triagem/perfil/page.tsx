@@ -11,21 +11,20 @@ export default function SelecaoPerfilPage() {
   const router = useRouter();
   const { setAgeGroup } = useTriagem();
 
-  const handleSelect = (ageGroup: AgeGroup) => {
+  const handleContinue = (ageGroup: AgeGroup) => {
     setAgeGroup(ageGroup);
     const firstQuestionId = getFirstQuestionId(ageGroup, {});
 
     if (!firstQuestionId) {
-      return false;
+      return;
     }
 
     router.push(`/triagem/${ageGroup}/${firstQuestionId}`);
-    return true;
   };
 
   return (
     <TriageScaffold>
-      <AgeSelectionScreen onSelect={handleSelect} />
+      <AgeSelectionScreen onContinue={handleContinue} />
     </TriageScaffold>
   );
 }
