@@ -24,7 +24,7 @@ const ageOptions: Array<{
 }> = [
   {
     id: "crianca",
-    label: "Crianca",
+    label: "Criança",
     description: "Rotina alimentar, escola e apoio familiar.",
     Icon: Baby,
   },
@@ -79,7 +79,7 @@ export function AgeSelectionScreen({ onContinue }: AgeSelectionScreenProps) {
   return (
     <TriageLayout
       eyebrow="PUBLICO DA TRIAGEM"
-      title="Qual e o perfil que vamos acompanhar?"
+      title="Qual é o perfil que vamos acompanhar?"
       helperText="Selecione a faixa etaria para carregar perguntas e orientacoes adequadas ao contexto."
       align="center"
       footer={
